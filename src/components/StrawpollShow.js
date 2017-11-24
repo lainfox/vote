@@ -35,7 +35,6 @@ class StrawpollShow extends React.Component {
         }
         ready = true;
         this.setState({id, question, choices, highest, total});
-        console.warn(this.state)
       } else {
         console.warn('error??')
         this.context.router.push('/');
@@ -50,7 +49,6 @@ class StrawpollShow extends React.Component {
       context: this,
       asArray: false,
       then(data) {
-        console.warn(data)
         callback(data);
       }
     });

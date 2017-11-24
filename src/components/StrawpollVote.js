@@ -20,8 +20,8 @@ const styles = {
 
 class StrawpollVote extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
     this.updateUserChoice = this.updateUserChoice.bind(this);
     this.isFormSubmitable = this.isFormSubmitable.bind(this);
     this.submit = this.submit.bind(this);
@@ -87,20 +87,14 @@ class StrawpollVote extends React.Component {
 
     const id = this.state.id,
           choices = this.state.choices;
+    const history = this.context.router.history;
     choices[this.state.userChoice].votes++;
 
-    console.warn(choices)
     base.update(`/question/${id}`, {
       data: {choices: choices},
-      then(err){
-        if(!err){
-          // Router.transitionTo('dashboard');
-          // const previousVotes = [...this.state.previousVotes],
-          //       path = `/show/${id}`;
-          // previousVotes.push(id);
-          // localStorage.setItem('previousVotes', JSON.stringify(previousVotes));
-          // this.context.router.push(path);
-          console.warn('ok???')
+      then: err => {
+        if (!err) {
+          this.context.router.history.push(`/q/${id}/re`)
         }
       }
     });
@@ -162,7 +156,7 @@ class StrawpollVote extends React.Component {
   }
 }
 
-StrawpollVote.propTypes = {
+StrawpollVote.contextTypes = {
   router: PropTypes.object
 };
 

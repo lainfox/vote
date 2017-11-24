@@ -16,8 +16,8 @@ import {
 
 class StrawpollCreate extends React.Component {
 
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     this.isFormSubmitable = this.isFormSubmitable.bind(this);
     this.state = {
       item: null,
@@ -67,8 +67,7 @@ class StrawpollCreate extends React.Component {
       data: newQuestion,
       context: this,
       then: () => {
-        console.log('POSTED');
-        // Redirect to result
+        this.context.router.history.push(`/q/${id}`)
       }
     });
   }
@@ -84,6 +83,8 @@ class StrawpollCreate extends React.Component {
   }
 
   render() {
+    // console.warn(this.context.router.history.push('/show'));
+
     const wait = this.state.wait,
           question = this.state.question,
           choices = [...this.state.choices];
@@ -126,7 +127,7 @@ class StrawpollCreate extends React.Component {
   }
 }
 
-StrawpollCreate.propTypes = {
+StrawpollCreate.contextTypes = {
   router: PropTypes.object
 };
 

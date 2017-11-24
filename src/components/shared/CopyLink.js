@@ -45,7 +45,7 @@ class CopyLink extends React.Component {
           />
           <CardText>
             <TextField className="vote-url"
-                       value={`${window.location.origin}/vote/${this.props.id}`} 
+                       value={`${window.location.origin}/q/${this.props.id}`} 
                        hintText="URL" 
                        fullWidth={true}
             />
